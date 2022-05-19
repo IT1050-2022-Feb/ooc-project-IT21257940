@@ -1,0 +1,516 @@
+//MLB_04.01_08 Online_Vaccination_Portal
+
+#include <iostream>
+#include<cstring>
+
+using namespace std;
+
+#define SIZE3 3
+#define SIZE2 3
+#define SIZE1 1
+
+class User;
+class RegisteredVaccinator;
+class RegisteredVaccineCandidate;
+class Administrator;
+class unregisteredVaccinator;
+class unregisteredVaccineCandidate;
+class candidateAppointment;
+class VaccinatorAppointment;
+class Vaccines;
+class Events;
+class feedback;
+class Reports;
+
+
+//User class 
+class User {
+protected:
+	char name[20];
+	char email[20];
+public:
+	User();
+	User(const char Pname[], const char Pemail[]);
+	void displayDetails();
+};
+
+//User class implementation
+
+User::User(){}
+User::User(const char Pname[], const char Pemail[]){
+  strcpy(name,Pname);
+  strcpy(email,Pemail);
+}
+
+void User::displayDetails(){}
+
+
+//RegisteredVaccinator class  
+class RegisteredVaccinator:public User{
+private:
+int registrationNo;
+int noOfVAppointments;
+char vaccinatorID[4];
+char userName[20];
+char password[6];
+char address[50];
+char dob[10];
+VaccinatorAppointment*vappointment[SIZE3];
+public:
+
+RegisteredVaccinator(const char PvaccinatorID[],const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfVAppointments);
+void login();
+void logout();
+void addvaccinatorAppointment(VaccinatorAppointment*Pvappointment);
+void displayVaccinatorDetails();
+
+};
+
+//RegisteredVaccinator class implementation
+RegisteredVaccinator::RegisteredVaccinator(const char PvaccinatorID[],const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfVAppointments):User(Pname,Pemail){
+  registrationNo=PregistrationNo;
+  noOfVAppointments=PnoOfVAppointments;
+  strcpy(vaccinatorID,PvaccinatorID);
+  strcpy(address,Paddress);
+  strcpy(dob,Pdob);
+  strcpy(password,Ppassword);
+  
+}
+void RegisteredVaccinator::addvaccinatorAppointment(VaccinatorAppointment*Pvappointment){
+  if(noOfVAppointments<SIZE3){
+    vappointment[noOfVAppointments]=Pvappointment;
+    noOfVAppointments++;
+  }
+}
+void RegisteredVaccinator::login(){
+  
+}
+void RegisteredVaccinator::logout(){
+  
+}
+
+void RegisteredVaccinator::displayVaccinatorDetails(){
+  
+}
+
+//RegisteredVaccineCandidate class 
+class RegisteredVaccineCandidate:public User{
+private:
+int registrationNo;
+int noOfCAppointments;
+char candidateID[4];
+char userName[10];
+char password[10];
+char address[20];
+char dob[10];
+candidateAppointment*cappointment[SIZE2];
+
+public:
+RegisteredVaccineCandidate(const char PvaccinatorID[], const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfCAppointments);
+
+void login();
+void logout();
+void addcandidateAppointment(candidateAppointment*Pcappointment);
+void displayCandidateDetails();
+
+};
+
+//RegisteredVaccineCandidate class implementation
+RegisteredVaccineCandidate::RegisteredVaccineCandidate(const char PvaccinatorID[], const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfCAppointments):User(Pname,Pemail){
+  registrationNo=PregistrationNo;
+  noOfCAppointments=PnoOfCAppointments;
+  strcpy(candidateID,PvaccinatorID);
+  strcpy(address,Paddress);
+  strcpy(dob,Pdob);
+  strcpy(password,Ppassword);
+}
+void RegisteredVaccineCandidate::addcandidateAppointment(candidateAppointment*Pcappointment){
+  if(noOfCAppointments<SIZE2){
+    cappointment[noOfCAppointments]=Pcappointment;
+    noOfCAppointments++;
+  }
+}
+void RegisteredVaccineCandidate::login(){
+  
+}
+void RegisteredVaccineCandidate::logout(){
+  
+}
+
+void RegisteredVaccineCandidate::displayCandidateDetails(){
+  
+}
+
+//Administrator class 
+class Administrator:public User{
+private:
+char adminID[4];
+char adminPassword[6];
+Events*event;
+public:
+
+Administrator(const char Pname[],const char Pemail[],const char PadminID[],const char Padminpassword[],Events*Pevent);
+void addEvents();
+void addVaccines();
+};
+
+//Administrator class implementation
+
+Administrator::Administrator(const char Pname[],const char Pemail[],const char PadminID[],const char Padminpassword[],Events*Pevent):User(Pname,Pemail){
+  strcpy(adminID,PadminID);
+  strcpy(adminPassword,Padminpassword);
+  event=Pevent;
+}
+void Administrator::addEvents(){
+  
+}
+void Administrator::addVaccines(){
+  
+}
+
+//unregisteredVaccineCandidate class
+class unregisteredVaccineCandidate:public User{
+private:
+Events*event;
+public:
+unregisteredVaccineCandidate(const char Pname[],const char Pemail[],Events*Pevent);
+void viewDetails();
+};
+
+//unregisteredVaccineCandidate class implementation
+unregisteredVaccineCandidate::unregisteredVaccineCandidate(const char Pname[],const char Pemail[],Events*Pevent):User(Pname,Pemail){   
+       event=Pevent;    
+}
+
+void unregisteredVaccineCandidate::viewDetails(){
+  
+}
+
+//unregisteredVaccinator class
+class unregisteredVaccinator:public User{
+private:
+Events*event;
+public:
+unregisteredVaccinator(const char Pname[],const char Pemail[],Events*Pevent);
+void viewDetails();
+};
+
+//unregisteredVaccinator class implementation
+unregisteredVaccinator::unregisteredVaccinator(const char Pname[],const char Pemail[],Events*Pevent):User(Pname,Pemail){  
+     event=Pevent;    
+}
+void unregisteredVaccinator::viewDetails(){
+  
+}
+
+//candidateAppointment class
+class candidateAppointment{
+private:
+char CAppointmentID[3];
+char CAppointmentDate[10];
+char healthCondition[20];
+RegisteredVaccineCandidate*candidate;
+Events*event;
+public:
+candidateAppointment();
+candidateAppointment(const char PCAappointmentID[],const char PCAppointmentDate[],const char PhealthCondition[],RegisteredVaccineCandidate*Pcandidate,Events*Pevent);
+void displayCandidateAppointmentDetails();
+void deleteCandidateAppointmentDetails();
+~candidateAppointment();
+};
+
+//candidateAppointment class implementation
+candidateAppointment::candidateAppointment(){}
+
+candidateAppointment::candidateAppointment(const char PCAappointmentID[],const char PCAppointmentDate[],const char PhealthCondition[],RegisteredVaccineCandidate*Pcandidate,Events*Pevent){
+  strcpy(CAppointmentID,PCAappointmentID);
+  strcpy(CAppointmentDate,PCAppointmentDate);
+  strcpy(healthCondition,PhealthCondition);
+
+  candidate=Pcandidate;
+  event=Pevent;
+  candidate->addcandidateAppointment(this);
+}
+void candidateAppointment::displayCandidateAppointmentDetails(){
+  
+}
+void candidateAppointment::deleteCandidateAppointmentDetails(){
+  
+}
+candidateAppointment::~candidateAppointment(){
+  
+}
+
+//VaccinatorAppointment class
+class VaccinatorAppointment{
+private:
+char VAppointmentID[4];
+char VAppointmentDate[10];
+char workingHospital[20];
+int yearsOfExperience; 
+RegisteredVaccinator*vaccinator;
+Events*event;
+public:
+VaccinatorAppointment();
+VaccinatorAppointment(const char PVAppointmentID[],const char PVAppointmentDate[],const char PworkingHospital[],int PyearsOfExperience,RegisteredVaccinator*Pvaccinator,Events*Pevent);
+void displayVaccinatorAppointmentDetails();
+void deleteVaccinatorAppointmentDetails();
+~VaccinatorAppointment();
+};
+
+//VaccinatorAppointment class implementation
+VaccinatorAppointment::VaccinatorAppointment(){}
+VaccinatorAppointment::VaccinatorAppointment(const char PVAppointmentID[],const char PVAppointmentDate[],const char PworkingHospital[],int PyearsOfExperience,RegisteredVaccinator*Pvaccinator,Events*Pevent){
+  strcpy(VAppointmentID,PVAppointmentID);
+  strcpy(VAppointmentDate,PVAppointmentDate);
+  strcpy(workingHospital,PworkingHospital);
+  yearsOfExperience=PyearsOfExperience;
+  event=Pevent;
+  vaccinator=Pvaccinator;
+  vaccinator->addvaccinatorAppointment(this);
+}
+void VaccinatorAppointment::displayVaccinatorAppointmentDetails(){
+  
+}
+void VaccinatorAppointment::deleteVaccinatorAppointmentDetails(){
+  
+}
+VaccinatorAppointment::~VaccinatorAppointment(){
+  
+}
+
+//feedback class 
+class feedback{
+private:
+int feedbackID;
+char comment[50];
+public:
+feedback();
+feedback(int fid,const char com[]);
+void addfeedback(RegisteredVaccineCandidate*Pcandidate);
+void displayFeedbackDetails();
+};
+
+//feedback class implementation
+feedback::feedback(){}
+feedback::feedback(int fid,const char com[]){
+  feedbackID=fid;
+  strcpy(comment,com);
+}
+
+void feedback::addfeedback(RegisteredVaccineCandidate*Pcandidate){
+  
+}
+void feedback::displayFeedbackDetails(){}
+
+//Vaccines class 
+class Vaccines{
+private:
+int vaccineID;
+char vaccineName[20];
+char vaccineManufacturerCountry[20];
+public:
+Vaccines();
+Vaccines(int PvaccineID,const char PvaccineName[],const char PvaccineManufacturerCountry[]);
+void displayVaccineDetails();
+~Vaccines();
+};
+
+//Vaccines class implementation
+Vaccines::Vaccines(){}
+
+Vaccines::Vaccines(int PvaccineID,const char PvaccineName[],const char PvaccineManufacturerCountry[]){
+  vaccineID=PvaccineID;
+ strcpy(vaccineName,PvaccineName);
+strcpy(vaccineManufacturerCountry,PvaccineManufacturerCountry);
+}
+void Vaccines::displayVaccineDetails(){
+  
+}
+Vaccines::~Vaccines(){}
+
+////Event class 
+class Events{
+private:
+int eventID;
+char eventName[20];
+char eventStartDate[10];
+char eventEndDate[10];
+Vaccines*vacc[SIZE1];
+
+public:
+Events();
+Events(int PeventID,const char PeventName[],const char PeventStartDate[],const char PeventEndDate[]);
+
+Events(int PvaccineID1,int PvaccineID2,int PvaccineID3,const char PvaccineName1[],const char PvaccineManufacturerCountry1[],const char PvaccineManufacturerCountry2[],const char PvaccineName2[],const char PvaccineName3[],const char PvaccineManufacturerCountry3[]);
+
+void eventDetails(int PeventID,const char PeventName[],const char PeventStartDate[],const char PeventEndDate[]);
+
+void displayEventDetails();
+~Events();
+};
+
+//Event class implementation
+Events::Events(){}
+Events::Events(int PeventID,const char PeventName[],const char PeventStartDate[],const char PeventEndDate[]){
+  
+  eventID=PeventID;
+  strcpy(eventName,PeventName);
+  strcpy(eventStartDate,PeventStartDate);
+  strcpy(eventEndDate,PeventEndDate);
+}
+  
+Events::Events(int PvaccineID1,int PvaccineID2,int PvaccineID3,const char PvaccineName1[],const char PvaccineManufacturerCountry1[],const char PvaccineManufacturerCountry2[],const char PvaccineName2[],const char PvaccineName3[],const char PvaccineManufacturerCountry3[]){
+  vacc[0]=new Vaccines(PvaccineID1,PvaccineName1,PvaccineManufacturerCountry1);
+  vacc[1]=new Vaccines(PvaccineID2,PvaccineName2,PvaccineManufacturerCountry2);
+  vacc[2]=new Vaccines(PvaccineID3,PvaccineName3,PvaccineManufacturerCountry3);
+  
+}
+void Events::eventDetails(int PeventID,const char PeventName[],const char PeventStartDate[],const char PeventEndDate[]){
+  
+}
+void Events::displayEventDetails(){
+  
+}
+
+Events::~Events(){
+  for(int i=0;i<SIZE1;i++){
+    delete vacc[i];
+  }
+}
+
+//Report class
+class Reports{
+private:
+int reportID;
+char reportdate[10];
+Vaccines*vacc[SIZE1];
+candidateAppointment*cappointment[SIZE2];
+VaccinatorAppointment*vappointment[SIZE3];
+
+public:
+Reports();
+Reports(int rid,const char rdate[],Vaccines*Pvacc[],VaccinatorAppointment*Pvappointment[],candidateAppointment*Pcappointment[]);
+
+void displayVaccineStockReports();
+void displayVaccinatorAppointmentDetails();
+void displayCandidateAppointmentDetails();
+~Reports();
+};
+
+//Report class implementation
+Reports::Reports(){}
+Reports::Reports(int rid,const char rdate[],Vaccines*Pvacc[],VaccinatorAppointment*Pvappointment[],candidateAppointment*Pcappointment[]){
+  reportID=rid;
+  strcpy(reportdate,rdate);
+  
+  for(int i=0;i<SIZE1;i++){
+    vacc[i]=Pvacc[i];
+  }
+  for(int j=0;j<SIZE2;j++){
+    vappointment[j]=Pvappointment[j];
+  }
+  for(int z=0;z<SIZE3;z++){
+    cappointment[z]=Pcappointment[z];
+  }
+}
+
+void Reports::displayVaccineStockReports(){}
+void Reports::displayVaccinatorAppointmentDetails(){}
+void Reports::displayCandidateAppointmentDetails(){}
+
+Reports::~Reports(){
+  for (int i = 0; i < SIZE1; i++)
+{
+delete vacc[i] ;
+}
+for (int j = 0; j < SIZE2; j++)
+{
+delete vappointment[j] ;
+}
+for (int z = 0; z < SIZE3; z++)
+{
+delete cappointment[z] ;
+}
+}
+
+int main(){
+  
+User*user;
+Vaccines*vacc;
+Events*event;
+VaccinatorAppointment*vappointment;
+candidateAppointment*cappointment;
+unregisteredVaccinator*unregisteredvaccinator;
+unregisteredVaccineCandidate*unregisteredvaccinecandidate;
+RegisteredVaccinator*vaccinator;
+feedback*Feedback;
+Administrator*admin;
+Reports*report;
+
+
+  user=new User();
+  user->displayDetails(); //method calling
+
+  
+  vacc=new Vaccines();
+  vacc->displayVaccineDetails(); //method calling
+
+  
+  event=new Events();
+  event->displayEventDetails(); //method calling
+
+  
+  admin->addEvents(); //method calling
+  admin->addVaccines(); //method calling
+
+  
+  unregisteredvaccinator->viewDetails(); //method calling
+
+  
+  unregisteredvaccinecandidate->viewDetails(); //method calling
+
+  
+  cappointment=new candidateAppointment(); 
+  cappointment->deleteCandidateAppointmentDetails(); //method calling
+  cappointment->displayCandidateAppointmentDetails(); //method calling
+
+  RegisteredVaccineCandidate*candidate;
+  candidate->displayCandidateDetails(); //method calling
+  candidate->addcandidateAppointment(cappointment);
+
+  
+  vappointment=new VaccinatorAppointment();
+  vappointment->deleteVaccinatorAppointmentDetails(); //method calling
+  vappointment->displayVaccinatorAppointmentDetails(); //method calling
+  
+  
+  vaccinator->displayVaccinatorDetails(); //method calling
+  vaccinator->addvaccinatorAppointment(vappointment);
+
+  
+  Feedback->displayFeedbackDetails(); //method calling
+  Feedback->addfeedback(candidate);
+
+  
+  report=new Reports();
+  report->displayVaccineStockReports(); //method calling
+  report-> displayVaccinatorAppointmentDetails(); //method calling
+  report->displayCandidateAppointmentDetails(); //method calling
+
+  //Delete  dynamic objects------
+  delete user;
+  delete vacc;
+  delete event;
+  delete admin;
+  delete unregisteredvaccinator;
+  delete unregisteredvaccinecandidate;
+  delete cappointment;
+  delete candidate;
+  delete vappointment;
+  delete vaccinator;
+  delete Feedback;
+  delete report;
+ 
+
+}
