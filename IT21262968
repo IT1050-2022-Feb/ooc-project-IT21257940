@@ -1,0 +1,107 @@
+//IT21262968_Welikala L.V
+
+//candidateAppointment.h
+
+#include"RegisteredVaccineCandidate.h"
+#include"Events.h"
+
+class candidateAppointment{
+private:
+char CAppointmentID[3];
+char CAppointmentDate[10];
+char healthCondition[20];
+RegisteredVaccineCandidate*candidate;
+Events*event;
+public:
+candidateAppointment();
+candidateAppointment(const char PCAappointmentID[],const char PCAppointmentDate[],const char PhealthCondition[],RegisteredVaccineCandidate*Pcandidate,Events*Pevent);
+void displayCandidateAppointmentDetails();
+void deleteCandidateAppointmentDetails();
+~candidateAppointment();
+};
+
+//candidateAppointment.cpp
+
+#include"candidateAppointment.h"
+#include<cstring>
+
+candidateAppointment::candidateAppointment(){}
+
+candidateAppointment::candidateAppointment(const char PCAappointmentID[],const char PCAppointmentDate[],const char PhealthCondition[],RegisteredVaccineCandidate*Pcandidate,Events*Pevent){
+  strcpy(CAppointmentID,PCAappointmentID);
+  strcpy(CAppointmentDate,PCAppointmentDate);
+  strcpy(healthCondition,PhealthCondition);
+
+  candidate=Pcandidate;
+  event=Pevent;
+  candidate->addcandidateAppointment(this);
+}
+void candidateAppointment::displayCandidateAppointmentDetails(){
+  
+}
+void candidateAppointment::deleteCandidateAppointmentDetails(){
+  
+}
+candidateAppointment::~candidateAppointment(){
+  
+}
+
+//RegisteredVaccineCandidate.h
+
+#include"User.h"
+#include"candidateAppointment.h"
+
+#define SIZE2 3
+
+class RegisteredVaccineCandidate:public User{
+private:
+int registrationNo;
+int noOfCAppointments;
+char candidateID[4];
+char userName[10];
+char password[10];
+char address[20];
+char dob[10];
+candidateAppointment*cappointment[SIZE2];
+
+public:
+RegisteredVaccineCandidate(const char PvaccinatorID[], const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfCAppointments);
+
+void login();
+void logout();
+void addcandidateAppointment(candidateAppointment*Pcappointment);
+void displayCandidateDetails();
+
+};
+
+//RegisteredVaccineCandidate.cpp
+
+#include"RegisteredVaccineCandidate.h"
+#include<cstring>
+
+
+RegisteredVaccineCandidate::RegisteredVaccineCandidate(const char PvaccinatorID[], const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfCAppointments):User(Pname,Pemail){
+  registrationNo=PregistrationNo;
+  noOfCAppointments=PnoOfCAppointments;
+  strcpy(candidateID,PvaccinatorID);
+  strcpy(address,Paddress);
+  strcpy(dob,Pdob);
+  strcpy(password,Ppassword);
+}
+void RegisteredVaccineCandidate::addcandidateAppointment(candidateAppointment*Pcappointment){
+  if(noOfCAppointments<SIZE2){
+    cappointment[noOfCAppointments]=Pcappointment;
+    noOfCAppointments++;
+  }
+}
+void RegisteredVaccineCandidate::login(){
+  
+}
+void RegisteredVaccineCandidate::logout(){
+  
+}
+
+void RegisteredVaccineCandidate::displayCandidateDetails(){
+  
+}
+
