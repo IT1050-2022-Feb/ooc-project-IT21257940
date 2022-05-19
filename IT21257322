@@ -1,0 +1,107 @@
+//IT21257322 - Binal Chanuka J.A
+//RegisteredVaccinator.cpp
+
+#include"RegisteredVaccinator.h"
+#include<cstring>
+
+RegisteredVaccinator::RegisteredVaccinator(const char PvaccinatorID[],const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfVAppointments):User(Pname,Pemail){
+  registrationNo=PregistrationNo;
+  noOfVAppointments=PnoOfVAppointments;
+  strcpy(vaccinatorID,PvaccinatorID);
+  strcpy(address,Paddress);
+  strcpy(dob,Pdob);
+  strcpy(password,Ppassword);
+  
+}
+void RegisteredVaccinator::addvaccinatorAppointment(VaccinatorAppointment*Pvappointment){
+  if(noOfVAppointments<SIZE3){
+    vappointment[noOfVAppointments]=Pvappointment;
+    noOfVAppointments++;
+  }
+}
+void RegisteredVaccinator::login(){
+  
+}
+void RegisteredVaccinator::logout(){
+  
+}
+
+void RegisteredVaccinator::displayVaccinatorDetails(){
+  
+}
+
+
+//RegisteredVaccinator.h
+
+#include"User.h"
+#include"VaccinatorAppointment.h"
+
+#define SIZE3 3
+
+class RegisteredVaccinator:public User{
+private:
+int registrationNo;
+int noOfVAppointments;
+char vaccinatorID[4];
+char userName[20];
+char password[6];
+char address[50];
+char dob[10];
+VaccinatorAppointment*vappointment[SIZE3];
+public:
+
+RegisteredVaccinator(const char PvaccinatorID[],const char Pname[],const char Pemail[],const char Ppassword[],const char Paddress[],const char Pdob[],int PregistrationNo,int PnoOfVAppointments);
+void login();
+void logout();
+void addvaccinatorAppointment(VaccinatorAppointment*Pvappointment);
+void displayVaccinatorDetails();
+
+};
+
+
+//VaccinatorAppointment.cpp
+
+#include"VaccinatorAppointment.h"
+#include<cstring>
+
+VaccinatorAppointment::VaccinatorAppointment(){}
+VaccinatorAppointment::VaccinatorAppointment(const char PVAppointmentID[],const char PVAppointmentDate[],const char PworkingHospital[],int PyearsOfExperience,RegisteredVaccinator*Pvaccinator,Events*Pevent){
+  strcpy(VAppointmentID,PVAppointmentID);
+  strcpy(VAppointmentDate,PVAppointmentDate);
+  strcpy(workingHospital,PworkingHospital);
+  yearsOfExperience=PyearsOfExperience;
+  event=Pevent;
+  vaccinator=Pvaccinator;
+  vaccinator->addvaccinatorAppointment(this);
+}
+void VaccinatorAppointment::displayVaccinatorAppointmentDetails(){
+  
+}
+void VaccinatorAppointment::deleteVaccinatorAppointmentDetails(){
+  
+}
+VaccinatorAppointment::~VaccinatorAppointment(){
+  
+}
+
+
+//VaccinatorAppointment.h
+
+#include"RegisteredVaccinator.h"
+#include"Events.h"
+
+class VaccinatorAppointment{
+private:
+char VAppointmentID[4];
+char VAppointmentDate[10];
+char workingHospital[20];
+int yearsOfExperience; 
+RegisteredVaccinator*vaccinator;
+Events*event;
+public:
+VaccinatorAppointment();
+VaccinatorAppointment(const char PVAppointmentID[],const char PVAppointmentDate[],const char PworkingHospital[],int PyearsOfExperience,RegisteredVaccinator*Pvaccinator,Events*Pevent);
+void displayVaccinatorAppointmentDetails();
+void deleteVaccinatorAppointmentDetails();
+~VaccinatorAppointment();
+};
