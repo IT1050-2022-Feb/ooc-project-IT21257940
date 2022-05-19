@@ -1,0 +1,22 @@
+//IT21259234......Chathushan S.K.D
+//header file of unregisteredVaccinator
+
+#include"User.h"
+#include"Events.h"
+#include"unregisteredVaccinator.h"
+class unregisteredVaccinator:public User{
+private:
+Events*event;
+public:
+unregisteredVaccinator(const char Pname[],const char Pemail[],Events*Pevent);
+void viewDetails();
+};
+
+//cpp file of unregisteredVaccinator
+
+unregisteredVaccinator::unregisteredVaccinator(const char Pname[],const char Pemail[],Events*Pevent):User(Pname,Pemail){  
+     event=Pevent;    
+}
+void unregisteredVaccinator::viewDetails(){
+  
+}
