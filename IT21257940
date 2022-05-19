@@ -1,0 +1,51 @@
+//IT21257940  Wijenayake P.A.P.N.D
+
+//unregisteredVaccineCandidate.h
+
+#include"Events.h"
+class unregisteredVaccineCandidate:public User{
+private:
+Events*event;
+public:
+unregisteredVaccineCandidate(const char Pname[],const char Pemail[],Events*Pevent);
+void viewDetails();
+};
+
+
+
+//unregisteredVaccineCandidate.cpp
+
+#include"unregisteredVaccineCandidate.h"
+unregisteredVaccineCandidate::unregisteredVaccineCandidate(const char Pname[],const char Pemail[],Events*Pevent):User(Pname,Pemail){   
+       event=Pevent;    
+}
+void unregisteredVaccineCandidate::viewDetails(){
+}
+
+
+//feedback.h
+
+#include"RegisteredVaccineCandidate.h"
+class feedback{
+private:
+int feedbackID;
+char comment[50];
+public:
+feedback();
+feedback(int fid,const char com[]);
+void addfeedback(RegisteredVaccineCandidate*candidate);
+void displayFeedbackDetails();
+};
+
+//feedback.cpp
+
+#include"feedback.h"
+#include<cstring>
+feedback::feedback(){}
+feedback::feedback(int fid,const char com[]){
+  feedbackID=fid;
+  strcpy(comment,com);
+}
+void feedback::addfeedback(RegisteredVaccineCandidate*Pcandidate){
+}
+void feedback::displayFeedbackDetails(){}
